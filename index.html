@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5Gotchi</title>
+</head>
+<body>
+	<h1>5Gotchi</h1>
+
+	<p><img src="pet.png" height="100%" width="100%"></p>
+
+	<p>Vida: <span id="vida">100</span></p>
+	<p>Felicidade: <span id="felicidade">50</span></p>
+	<p>Fome: <span id="fome">50</span></p>
+	<p>Energia: <span id="energia">50</span></p>
+
+	<button onclick="alimentar()">Alimentar</button>
+	<button onclick="brincar()">Brincar</button>
+	<button onclick="dormir()">Dormir</button>
+
+	<script>
+		let vida = 100;
+		let felicidade = 50;
+		let fome = 50;
+		let energia = 50;
+
+		function alimentar() {
+			fome += 10;
+			felicidade += 5;
+			energia -= 5;
+			atualizarStatus();
+		}
+
+		function brincar() {
+			fome -= 5;
+			felicidade += 10;
+			energia -= 10;
+			atualizarStatus();
+		}
+
+		function dormir() {
+			fome -= 10;
+			felicidade -= 10;
+			energia += 20;
+			atualizarStatus();
+		}
+
+		function atualizarStatus() {
+			document.getElementById("fome").innerText = fome;
+			document.getElementById("felicidade").innerText = felicidade;
+			document.getElementById("energia").innerText = energia;
+			vida = fome + felicidade + energia;
+			document.getElementById("vida").innerText = vida;
+			if (vida <= 0) {
+				alert("Game over!");
+				location.reload();
+			}
+			if (fome >= 100 || felicidade >= 100 || energia >= 100) {
+				alert("Você ganhou!");
+				location.reload();
+			}
+			if (fome <= 0 || felicidade <= 0 || energia <= 0) {
+				alert("Seu pet morreu!");
+				location.reload();
+			}
+		}
+	</script>
+</body>
+</html>
